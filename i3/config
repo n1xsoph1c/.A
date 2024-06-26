@@ -9,13 +9,15 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+set $wall ~/Wallpapers/bmw-japan-car-black-wallpaper.jpg
+
 exec_always xrandr --output eDP-1 --mode 1920x1080
-exec_always xrandr --dpi 220
-exec_always feh --bg-fill ~/Wallpapers/Wallpaper-2.jpg
+exec_always xrdb ~/.Xresources
+exec_always feh --bg-fill $wall
 exec_always picom 
 exec_always ~/.config/polybar/launch.sh --material
-exec_always --no-startup-id st -e ~/.config/polybar/material/scripts/pywal.sh ~/Wallpapers/Wallpaper-2.jpg
-exec_always libinput-gestures-setup start
+exec_always --no-startup-id st -e ~/.config/polybar/material/scripts/pywal.sh $wall
+exec_always --no-startup-id st -e libinput-gestures-setup autostart restart
 
 set $mod Mod4
 set $alt Mod1
@@ -186,6 +188,17 @@ bindsym $mod+Mod1+Shift+Left resize shrink width 10 px or 10 ppt
 bindsym $mod+Mod1+Shift+Down resize grow height 10 px or 10 ppt
 bindsym $mod+Mod1+Shift+Up resize shrink height 10 px or 10 ppt
 bindsym $mod+Mod1+Shift+Right resize grow width 10 px or 10 ppt
+
+## Screenshots
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date).png"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date).png"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+
 
 # bindsym $mod+r mode "resize"
 

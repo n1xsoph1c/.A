@@ -62,7 +62,7 @@ install_fonts() {
   echo 'export FREETYPE_PROPERTIES="truetype:interpreter-version=40"' | sudo tee /etc/profile.d/freetype2.sh
 
   mkdir -p ~/.config/fontconfig/conf.d/
-  cat <<EOF > ~/.config/fontconfig/conf.d/20-no-embedded.conf
+  cat <<EOF >~/.config/fontconfig/conf.d/20-no-embedded.conf
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
@@ -82,7 +82,7 @@ install_touch_pad() {
   sudo pacman -S --needed xdotool wmctrl
   paru -S libinput-gestures
 
-  sudo gpasswd -aG input "$USER" 
+  sudo gpasswd -aG input "$USER"
 }
 
 # Function to create symbolic links
@@ -90,7 +90,7 @@ create_symlinks() {
   echo -ne "$(col_blue '[!]') -> Creating symbolic links"
 
   mkdir -p ~/.config
-  ln -sf ~/.A/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
+  ln -sf ~/.A/fontconfig ~/.config/fontconfig
   ln -sf ~/.A/picom/ ~/.config/picom
   ln -sf ~/.A/kitty/ ~/.config/kitty
   ln -sf ~/.A/i3/ ~/.config/i3
@@ -120,4 +120,3 @@ main() {
 
 # Execute the main function
 main
-
